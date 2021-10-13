@@ -1,0 +1,91 @@
+# --- QMIX specific parameters ---
+
+# use epsilon greedy action selector
+action_selector: "epsilon_greedy"
+epsilon_start: 1.0
+epsilon_finish: 0.05
+epsilon_anneal_time: 500000
+
+runner: "CMARL"
+batch_size_run: 8
+
+# update the target network every {} episodes
+target_update_interval: 800
+
+# use the Q_Learner to train
+agent_output_type: "q"
+learner: "q_learner"
+double_q: True
+mixer: "qmix"
+mixing_embed_dim: 32
+
+hypernet_layers: 2
+hypernet_embed: 64
+
+name: "qmix_smac_parallel"
+
+recover_replay: False
+
+log_time_interval: 120.0
+test_time_interval: 120.0
+training_time: 90000.0
+save_model_time_interval: 1200.0
+save_model_path: "/home/wsy/CMARL/results"
+
+epsilon_lb: 1.0
+epsilon_rb: 4.0
+
+priority_eta: 0.9
+alpha: 0.6
+
+diverse_beta1: 0.8
+diverse_beta2: 0.2
+diverse_loss_target: 0.05
+diverse_start_anneal_time: 60000000
+diverse_anneal_rate: 0.04
+
+centralizer_receive_ratio: 0.6
+
+update_global_mac_time_interval: 30
+update_container_qs_time_interval: 30
+
+centralizer_buffer_size: 5000
+log_centralizer_buffer_manager: True
+centralizer_learner_batch_size: 128
+centralizer_learner_queue_size: 8
+centralizer_priority_calculator_batch_size: 128
+centralizer_priority_calculator_queue_size: 0
+centralizer_buffer_receiver_size: 420
+log_centralizer_buffer_receiver: True
+log_centralizer_initial_priority_calculator: True
+log_centralizer_learner: True
+log_centralizer_priority_calculator: True
+
+container_buffer_size: 3400
+actor_buffer_size: 12
+log_actor: True
+no_exploration_diversity: False
+container_learner_batch_size: 64
+container_learner_queue_size: 6
+container_priority_calculator_batch_size: 64
+container_priority_calculator_queue_size: 0
+container_buffer_receiver_size: 300
+log_container_buffer_receiver: True
+log_container_initial_priority_calculator: True
+log_container_learner: True
+log_container_priority_calculator: True
+n_container_buffer_receiver_queues: 2
+
+log_priority_calculator: True
+
+n_container: 3
+centralizer_learner_device: "cuda:7"
+centralizer_priority_calculator_device: "cuda:7"
+centralizer_buffer_device: "cuda:5"
+container_learner_device: ["cuda:6","cuda:6","cuda:6"]
+container_priority_calculator_device: ["cuda:6","cuda:6","cuda:6"]
+container_buffer_device: ["cuda:0","cuda:2","cuda:4"]
+container_actor_devices: [["cuda:0", "cuda:0", "cuda:0", "cuda:0", "cuda:0", "cuda:0", "cuda:1", "cuda:1", "cuda:1", "cuda:1", "cuda:1", "cuda:1", "cuda:1" ],
+                          [ "cuda:2", "cuda:2", "cuda:2", "cuda:2", "cuda:2", "cuda:2", "cuda:3", "cuda:3", "cuda:3", "cuda:3", "cuda:3", "cuda:3", "cuda:3" ],
+                          [ "cuda:4", "cuda:4", "cuda:4", "cuda:4", "cuda:4", "cuda:4", "cuda:5", "cuda:5", "cuda:5", "cuda:5", "cuda:5", "cuda:1", "cuda:3" ]]
+
